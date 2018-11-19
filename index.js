@@ -5,8 +5,8 @@ const token = process.env.token;
 
 //Message de jeu dans le status
 bot.on('ready', function () {
-    bot.user.setGame("moi venir en paix")
-
+    console.log("Je suis prêt et opérationnel.")
+    bot.user.setActivity("venir en paix").catch(console.error)
 
 })
 
