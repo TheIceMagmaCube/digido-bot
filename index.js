@@ -54,7 +54,7 @@ bot.on('message', function (message) {
 
 bot.on('message', function (message) {
     if (message.content === '//ready') {
-        message.channel.send(":warning: Le système d'autorisation est prêt :warning: \n\nRedirection ...\n\n Système prêt :white_check_mark: \n Système encrypté :white_check_mark:\n Système limité par UCS :white_check_mark: \n\n Tout les fonctions ont été restaurés. Token modifié")
+        message.channel.send("Le système à déjà été lancé et sécurisé \nVoulez vous le rédémarrer ?")
 
     }
 })
