@@ -54,7 +54,7 @@ bot.on('message', function (message) {
 
 bot.on('message', function (message) {
     if (message.content === '//ready') {
-        message.channel.send("Le système à déjà été lancé et sécurisé \nVoulez vous le rédémarrer ?")
+        message.channel.send("Le système à déjà été lancé et sécurisé :warning: \nVoulez vous le rédémarrer ?")
 
     }
 })
