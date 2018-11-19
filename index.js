@@ -19,7 +19,7 @@ bot.on('message', function (message) {
 
 bot.on('message', function (message) {
     if (message.content === '//reset') {
-        message.channel.send(':warning: Salon vidé :warning')
+        message.channel.send(':warning: Salon vidé :warning:')
 
     }
 })
