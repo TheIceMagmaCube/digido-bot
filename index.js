@@ -6,7 +6,7 @@ client.login(process.env.token);
 
 client.on("ready", () => {
 	console.log(`Le bot est connecté, avec ${client.users.size} utilisateurs, dans ${client.channels.size} channels de ${client.guilds.size} serveurs.`); 
-	client.user.setActivity("soigné des gens.");
+	client.user.setActivity("soigner des gens.");
 });
 
 client.on("guildMemberAdd", member => {
@@ -27,7 +27,7 @@ client.on("message", async message => {
 	if(command === "help") {
 		message.channel.send({embed: {
 			color: 130,
-			description: `**Liste des commandes :**\n\n\`>>help\`\n *Utilisation: >>help*\n\n\`>>ping\`\n *Utilisation: >>ping*\n\n\`>>say\`\n *Utilisation: >>say La chose à faire dire au bot !*\n\n\`>>poll\`\n *Utilisation : >>poll |Titre du sondage|Proposition 1|Proposition 2|Proposition 3|Proposition 4*\n\n\`>>kick\`\n *Utilisation: >>kick @lenomdumembre#0000 La raison du kick !*\n\n\`>>ban\`\n *Utilisation: >>ban @lenomdumembre#0000 La raison du ban !*\n\n\`>>nuke\`\n *Utilisation: >>nuke Un_nombre_entre_2_et_100*`
+			description: `**Liste des commandes :**\n\n\`//help\`\n *Utilisation: //help*\n\n\`//ping\`\n *Utilisation: //ping*\n\n\`//say\`\n *Utilisation: //say La chose à faire dire au bot !*\n\n\`//poll\`\n *Utilisation : //poll |Titre du sondage|Proposition 1|Proposition 2|Proposition 3|Proposition 4*\n\n\`//kick\`\n *Utilisation: //kick @lenomdumembre#0000 La raison du kick !*\n\n\`//ban\`\n *Utilisation: //ban @lenomdumembre#0000 La raison du ban !*\n\n\`//nuke\`\n *Utilisation: //nuke Un_nombre_entre_2_et_100*\n\n\`//mpto\`\n*Utilisation: //mpto |@lenomdumembre#0000|Le MP à envoyer*`
 		}});
 	}
  
@@ -187,5 +187,29 @@ client.on("message", async message => {
 					text: `À vous de choisir !`
 				}
 			}});
+	}
+	
+	if(command === "mpto") {
+		if(!message.member.roles.some(r=>["Staff"].includes(r.name)) )
+		return message.reply({embed: {
+			color: 15700514,
+			description: "Désolé vous n'avez pas la permission pour utilisé cette commande !"
+		}});
+		
+		let diffPart = message.content.split("|");
+		if(!diffPart || diffPart.length < 3 || diffPart.length > 3)
+			return message.channel.send({embed: {
+				color: 15700514,
+				description: "Mettez une mention d'un membre et et le message souhaiter !",
+				footer: {
+					icon_url: message.author.avatarURL,
+					text: `Pour ${message.author.tag}`
+				}
+			}});
+		else if(diffPart.length === 3) {
+			message.createDM(diffPart[1]).then(channel => {
+			return channel.send(diffPart[2]);
+			}).catch(console.error)
+		}
 	}
 });
