@@ -195,21 +195,17 @@ client.on("message", async message => {
 			color: 15700514,
 			description: "Désolé vous n'avez pas la permission pour utilisé cette commande !"
 		}});
-		
-		let diffPart = message.content.split("|");
-		if(!diffPart || diffPart.length < 3 || diffPart.length > 3)
-			return message.channel.send({embed: {
-				color: 15700514,
-				description: "Mettez une mention d'un membre et et le message souhaiter !",
-				footer: {
-					icon_url: message.author.avatarURL,
-					text: `Pour ${message.author.tag}`
-				}
-			}});
-		else if(diffPart.length === 3) {
-			message.createDM(diffPart[1]).then(channel => {
-			return channel.send(diffPart[2]);
-			}).catch(console.error)
+
+		let mention = message.mentions.members.first();
+		let mentionMessage = message.content.slice(8);
+		message.delete();
+		mention.send(mentionMessage);
+		message.channel.send({embed: {
+			color: 33280,
+			description: `L'envoi à bien été effectué.`
+		}});
+	}
+});
 		}
 	}
 });
