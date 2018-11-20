@@ -237,12 +237,12 @@ client.on("message", async message => {
 			}});
 	}
 	
-	else if(commande === "pause") {
+	if(commande === "pause") {
 		if(dispatcher !== undefined)
 			dispatcher.pause();
 	}
 		
-	else if(commande === "resume") {
+	if(commande === "resume") {
 		if(dispatcher !== undefined)
 			dispatcher.resume();
 	}
