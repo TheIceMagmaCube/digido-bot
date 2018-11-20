@@ -10,6 +10,13 @@ bot.on('ready', function () {
 
 })
 
+bot.on('guildMemberAdd', member => {
+    member.createDM().then(channel => {
+        return channel.send("Bienvenue " + member.displayName + ",\n\nJe suis Digido BOT, chargé de maintenir ordre et respect sur ce serveur.\nNous interdisons :\n- Racisme\n- Sexisme\n- Propos déplacés\n- Publicité sans l'accord d'un Administarteur\n- Menaces\n- Spam (Mee6 sais s'en occuper, donc attention !)\n\n **Ces règles seront amenées à changer, on vous connectant sur le serveur, vous acceptez les CGU**\n\nPassez un agréable moment sur notre serveur !\nTheIceMagmaCube et l'équipe d'administration.\n\n\n**ATTENTION : En étant sur ce serveur, vous vous engagez à accepter ces conditions, nous conservons le droit de vous bannir si vous ne respectez pas ces règles.**")
+        console.log(`${member.displayName} à rejoint le serveur.`)
+    }).catch(console.error)
+
+
 bot.on('message', function (message) {
     if (message.content === '//funradio') {
         message.channel.send('!!!radio FUN RADIO')
