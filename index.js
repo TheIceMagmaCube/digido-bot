@@ -1,97 +1,191 @@
-//Initisation
-const Discord = require('discord.js');
-const bot = new Discord.Client()
-const token = process.env.token;
+const Discord = require("discord.js");
+const client = new Discord.Client();
+const config = require("./config.json");
 
-//Message de jeu dans le status
-bot.on('ready', function () {
-    console.log("Je suis prêt et opérationnel.")
-    bot.user.setActivity("soigner des gens").catch(console.error)
+client.login(process.env.TOKEN);
 
-})
+client.on("ready", () => {
+	console.log(`Le bot est connecté, avec ${client.users.size} utilisateurs, dans ${client.channels.size} channels de ${client.guilds.size} serveurs.`); 
+	client.user.setActivity("Command: >>help");
+});
 
+client.on("guildMemberAdd", member => {
+	member.createDM().then(channel => {
+		return channel.send("Bienvenue dans **Digido Studio** " + member.displayName);
+	}).catch(console.error)
+});
 
+client.on("message", async message => {
 
-
-bot.on('message', function (message) {
-    if (message.content === '//funradio') {
-        message.channel.send('!!!radio FUN RADIO')
-
-    }
-})
-
-bot.on('message', function (message) {
-    if (message.content === '//moi') {
-        message.channel.send('Je suis le bot de Digido !\n\nJe suis actuellement en marche, la synchronisation GitHub est fonctionnelle\nLes commandes sont opérationelles\nMa version est : 0.1.2.0')
-
-    }
-})
-
-bot.on('message', function (message) {
-    if (message.content === '//reset') {
-        message.channel.send(':warning: Salon vidé :warning:')
-
-    }
-})
-
-bot.on('message', function (message) {
-    if (message.content === '//nrj') {
-        message.channel.send('!!!radio NRJ FR')
-
-    }
-})
-
-bot.on('message', function (message) {
-    if (message.content === '//ping') {
-        message.channel.send('Pong. On peut jouer à ça longtemps ...')
-
-    }
-})
-
-bot.on('message', function (message) {
-    if (message.content === '//pong') {
-        message.reply("J'en ai marre ... casse toi")
-
-    }
-})
-
-bot.on('message', function (message) {
-    if (message.content === '//slt') {
-        message.reply("Mais niquer tes mort, sale imbécile")
-
-    }
-})
-
-bot.on('message', function (message) {
-    if (message.content === '//firststart') {
-        message.channel.send(":warning: Préparation à la première utilisation en cours :warning: \n\nVeuillez patienter ...\n\n Système prêt :white_check_mark:")
-
-    }
-})
-
-bot.on('message', function (message) {
-    if (message.content === '//ready') {
-        message.channel.send("Le système à déjà été lancé et sécurisé :warning: \nVoulez vous le rédémarrer ?")
-
-    }
-})
-
-bot.on('message', message => {
+	if(message.author.bot) return;
   
-    if (message.content === '//join') {
-      // Only try to join the sender's voice channel if they are in one themselves
-      if (message.member.voiceChannel) {
-        message.member.voiceChannel.join()
-          .then(connection => { // Connection is an instance of VoiceConnection
-            message.reply('Je suis connecté dans votre channel !');
-          })
-          .catch(console.log);
-      } else {
-        message.reply('Les samouraïs de Discord se sont perdus en route !\n\n Essayez de changer de salon vocal');
-      }
-    }
-  });
+	if(message.content.indexOf(config.prefix) !== 0) return;
 
+	const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
+	const command = args.shift().toLowerCase();
 
+	if(command === "help") {
+		message.channel.send({embed: {
+			color: 130,
+			description: `**Liste des commandes :**\n\n\`>>help\`\n *Utilisation: >>help*\n\n\`>>ping\`\n *Utilisation: >>ping*\n\n\`>>say\`\n *Utilisation: >>say La chose à faire dire au bot !*\n\n\`>>poll\`\n *Utilisation : >>poll |Titre du sondage|Proposition 1|Proposition 2|Proposition 3|Proposition 4*\n\n\`>>kick\`\n *Utilisation: >>kick @lenomdumembre#0000 La raison du kick !*\n\n\`>>ban\`\n *Utilisation: >>ban @lenomdumembre#0000 La raison du ban !*\n\n\`>>nuke\`\n *Utilisation: >>nuke Un_nombre_entre_2_et_100*`
+		}});
+	}
+ 
+	if(command === "ping") {
+		const m = await message.channel.send("Ping?");
+		m.edit({embed: {
+			color: 33280,
+			description: `Pong! La latence est de ${m.createdTimestamp - message.createdTimestamp}ms.\nLa latence de l'API est de ${Math.round(client.ping)}ms`
+		}});
+	}
+  
+	if(command === "say") {
+		if(!message.member.roles.some(r=>["Staff"].includes(r.name)) )
+			return message.reply({embed: {
+				color: 15700514,
+				description: "Désolé vous n'avez pas la permission pour utilisé cette commande !"
+			}});
 
-bot.login(token)
+		const sayMessage = args.join(" ");
+		message.delete().catch(O_o=>{});
+		message.channel.send({embed: {
+			color: 33410,
+			description: sayMessage
+		}});
+	}
+  
+	if(command === "kick") {
+		if(!message.member.roles.some(r=>["Staff"].includes(r.name)) )
+			return message.reply({embed: {
+				color: 15700514,
+				description: "Désolé vous n'avez pas la permission pour utilisé cette commande !"
+			}});
+
+		let member = message.mentions.members.first() || message.guild.members.get(args[0]);
+		if(!member)
+			return message.reply({embed: {
+				color: 15700514,
+				description: "Mentionnée un membre valide du serveur !"
+			}});
+		if(!member.kickable) 
+			return message.reply({embed: {
+				color: 15700514,
+				description: "Je ne peux pas kick ce membre, il peut-être un rôle trop haut ou vous n'avez peut-être pas la permission pour."
+			}});
+
+		let reason = args.slice(1).join(' ');
+		if(!reason) reason = "Aucune raison fournie !";
+    
+		await member.kick(reason)
+			.catch(error => message.reply({embed: {
+				color: 15700514,
+				description: `Désolé ${message.author} je ne peux pas le kick car: ${error}`
+			}}));
+		message.channel.send({embed: {
+			color: 13107200,
+			description: `${member.user.tag} à été kick par ${message.author.tag} car: ${reason}`
+		}});
+
+	}
+  
+	if(command === "ban") {
+		if(!message.member.roles.some(r=>["Staff"].includes(r.name)) )
+			return message.reply({embed: {
+				color: 15700514,
+				description: "Désolé vous n'avez pas la permission pour utilisé cette commande !"
+			}});
+    
+		let member = message.mentions.members.first();
+		if(!member)
+			return message.reply({embed: {
+				color: 15700514,
+				description: "Mentionnée un membre valide du serveur !"
+			}});
+		if(!member.bannable) 
+			return message.reply({embed: {
+				color: 15700514,
+				description: "Je ne peux pas ban ce membre, il peut-être un rôle trop haut ou vous n'avez peut-être pas la permission pour."
+			}});
+
+		let reason = args.slice(1).join(' ');
+		if(!reason) reason = "Aucune raison fournie !";
+    
+		await member.ban(reason)
+			.catch(error => message.reply({embed: {
+				color: 15700514,
+				description: `Désolé ${message.author} je ne peux pas le ban car: ${error}`
+			}}));
+		message.channel.send({embed: {
+			color: 13107200,
+			description: `${member.user.tag} à été ban par ${message.author.tag} car: ${reason}`
+		}});
+	}
+  
+	if(command === "nuke") {
+		if(!message.member.roles.some(r=>["Staff"].includes(r.name)) )
+			return message.reply({embed: {
+				color: 15700514,
+				description: "Désolé vous n'avez pas la permission pour utilisé cette commande !"
+			}});
+
+		const deleteCount = parseInt(args[0], 10);
+    
+		if(!deleteCount || deleteCount < 2 || deleteCount > 100)
+			return message.reply({embed: {
+				color: 15700514,
+				description: "Mettez un nombre entre 2 et 100 !"
+			}});
+    
+		const fetched = await message.channel.fetchMessages({limit: deleteCount});
+		message.channel.bulkDelete(fetched)
+			.catch(error => message.reply({embed: {
+				color: 15700514,
+				description: `Je ne peux pas supprimé les messages car: ${error}`
+			}}));
+	}
+
+	if(command === "poll") {
+		if(!message.member.roles.some(r=>["Staff"].includes(r.name)) )
+		return message.reply({embed: {
+			color: 15700514,
+			description: "Désolé vous n'avez pas la permission pour utilisé cette commande !"
+		}});
+		let diffPropose = message.content.split("|");
+		if(diffPropose.length < 4 || diffPropose.length > 6)
+			return message.channel.send({embed: {
+				color: 15700514,
+				description: "Mettez un titre et entre 2 et 4 proposition !",
+				footer: {
+					icon_url: message.author.avatarURL,
+					text: `Pour ${message.author.tag}`
+				}
+			}});
+
+		else if(diffPropose.length === 4)
+			return message.channel.send(`:loudspeaker: **${diffPropose[1]}**`, {embed: {
+				color: 130,
+				description: `\n:regional_indicator_a: **${diffPropose[2]}**\n\n:regional_indicator_b: **${diffPropose[3]}**`,
+				footer: {
+					text: `À vous de choisir !`
+				}
+			}});
+
+		else if(diffPropose.length === 5)
+			return message.channel.send(`:loudspeaker: **${diffPropose[1]}**`, {embed: {
+				color: 130,
+				description: `\n:regional_indicator_a: **${diffPropose[2]}**\n\n:regional_indicator_b: **${diffPropose[3]}**\n\n:regional_indicator_c: **${diffPropose[4]}**`,
+				footer: {
+					text: `À vous de choisir !`
+				}
+			}});
+
+		else if(diffPropose.length === 6)
+			return message.channel.send(`:loudspeaker: **${diffPropose[1]}**`, {embed: {
+				color: 130,
+				description: `\n:regional_indicator_a: **${diffPropose[2]}**\n\n:regional_indicator_b: **${diffPropose[3]}**\n\n:regional_indicator_c: **${diffPropose[4]}**\n\n:regional_indicator_d: **${diffPropose[5]}**`,
+				footer: {
+					text: `À vous de choisir !`
+				}
+			}});
+	}
+});
