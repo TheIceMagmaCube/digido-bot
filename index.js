@@ -27,7 +27,7 @@ client.on("message", async message => {
 	if(command === "help") {
 		message.channel.send({embed: {
 			color: 130,
-			description: `**Liste des commandes :**\n\n\`//help\`\n *Utilisation: //help*\n\n\`//ping\`\n *Utilisation: //ping*\n\n\`//say\`\n *Utilisation: //say La chose à faire dire au bot !*\n\n\`//poll\`\n *Utilisation : //poll |Titre du sondage|Proposition 1|Proposition 2|Proposition 3|Proposition 4*\n\n\`//kick\`\n *Utilisation: //kick @lenomdumembre#0000 La raison du kick !*\n\n\`//ban\`\n *Utilisation: //ban @lenomdumembre#0000 La raison du ban !*\n\n\`//nuke\`\n *Utilisation: //nuke Un_nombre_entre_2_et_100*\n\n\`//mpto\`\n*Utilisation: //mpto |@lenomdumembre#0000|Le MP à envoyer*`
+			description: `**Liste des commandes :**\n\n\`//help\`\n *Utilisation: //help*\n\n\`//ping\`\n *Utilisation: //ping*\n\n\`//say\`\n *Utilisation: //say La chose à faire dire au bot !*\n\n\`//poll\`\n *Utilisation : //poll |Titre du sondage|Proposition 1|Proposition 2|Proposition 3|Proposition 4*\n\n\`//kick\`\n *Utilisation: //kick @lenomdumembre#0000 La raison du kick !*\n\n\`//ban\`\n *Utilisation: //ban @lenomdumembre#0000 La raison du ban !*\n\n\`//nuke\`\n *Utilisation: //nuke Un_nombre_entre_2_et_100*\n\n\`//mpto\`\n*Utilisation: //mpto @lenomdumembre#0000 Le MP à envoyer*`
 		}});
 	}
  
