@@ -68,7 +68,7 @@ bot.on('message', function (message) {
 
 
 
- if(command === "poll") {
+ if(command === "//poll") {
         if(!message.member.roles.some(r=>["Damax41 ☄️", "Staff ✅"].includes(r.name)) )
         return message.reply({embed: {
             color: 15700514,
