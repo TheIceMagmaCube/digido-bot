@@ -27,7 +27,7 @@ client.on("message", async message => {
 	if(command === "help") {
 		message.channel.send({embed: {
 			color: 130,
-			description: `**Liste des commandes :**\n\n\`//help\`\n *Utilisation: //help*\n\n\`//ping\`\n *Utilisation: //ping*\n\n\`//say\`\n *Utilisation: //say La chose à faire dire au bot !*\n\n\`//poll\`\n *Utilisation : //poll |Titre du sondage|Proposition 1|Proposition 2|Proposition 3|Proposition 4*\n\n\`//kick\`\n *Utilisation: //kick @lenomdumembre#0000 La raison du kick !*\n\n\`//ban\`\n *Utilisation: //ban @lenomdumembre#0000 La raison du ban !*\n\n\`//nuke\`\n *Utilisation: //nuke Un_nombre_entre_2_et_100*\n\n\`//mpto\`\n*Utilisation: //mpto | @lenomdumembre#0000 Le MP à envoyer*`
+			description: `**Liste des commandes :**\n\n\`//help\`\n *Utilisation: //help*\n\n\`//ping\`\n *Utilisation: //ping*\n\n\`//say\`\n *Utilisation: //say La chose à faire dire au bot !*\n\n\`//poll\`\n *Utilisation : //poll |Titre du sondage|Proposition 1|Proposition 2|Proposition 3|Proposition 4*\n\n\`//kick\`\n *Utilisation: //kick @lenomdumembre#0000 La raison du kick !*\n\n\`//ban\`\n *Utilisation: //ban @lenomdumembre#0000 La raison du ban !*\n\n\`//nuke\`\n *Utilisation: //nuke Un_nombre_entre_2_et_100*\n\n\`//mpto\`\n *Utilisation: //mpto | @lenomdumembre#0000 Le MP à envoyer*\n\n\`//play\`\n *Utilisation: //play URL_de_la_musique*\n\n\`//pause\`\n *Utilisation: //pause*\n\n\`//resume\`\n *Utilisation: //resume*`
 		}});
 	}
  
@@ -204,5 +204,45 @@ client.on("message", async message => {
 			color: 33280,
 			description: `L'envoi à bien été effectué.`
 		}});
+	}
+	
+	if(command === "play") {
+		let urlMusic = message.content(" ");
+		
+		if(urlMusic.length === 2) {
+			if(message.member.voiceChannel) {
+				message.member.voiceChannel.join().then(connection => {
+					dispatcher = connection.playArbitraryInput(urlMusic[1]);
+					
+					dispatcher.on("end", e => {
+						dispatcher = undefined;
+						message.channel.send({embed: {
+							color: 33280,
+							description: `Fin du son`
+						}});
+					}).catch(console.log);
+				});
+			}
+			else
+				return message.reply({embed: {
+				color: 15700514,
+				description: "Allez dans un salon vocal !"
+			}});
+		}
+		else
+			return message.reply({embed: {
+				color: 15700514,
+				description: "Mettez des paramètre valide !"
+			}});
+	}
+	
+	else if(commande === "pause") {
+		if(dispatcher !== undefined)
+			dispatcher.pause();
+	}
+		
+	else if(commande === "resume") {
+		if(dispatcher !== undefined)
+			dispatcher.resume();
 	}
 });
