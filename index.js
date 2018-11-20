@@ -18,6 +18,13 @@ bot.on('message', function (message) {
 })
 
 bot.on('message', function (message) {
+    if (message.content === '//moi') {
+        message.channel.send('Je suis le bot de Digido !\n\nJe suis actuellement en marche, la synchronisation GitHub est fonctionnelle\nLes commandes sont opérationelles\nMa version est : 0.1.2.0')
+
+    }
+})
+
+bot.on('message', function (message) {
     if (message.content === '//reset') {
         message.channel.send(':warning: Salon vidé :warning:')
 
