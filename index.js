@@ -66,6 +66,57 @@ bot.on('message', function (message) {
     }
 })
 
+
+
+ if(command === "poll") {
+        if(!message.member.roles.some(r=>["Damax41 ☄️", "Staff ✅"].includes(r.name)) )
+        return message.reply({embed: {
+            color: 15700514,
+            description: "Désolé vous n'avez pas la permission pour utilisé cette commande !"
+        }});
+        let diffPropose = message.content.split("|");
+        if(diffPropose.length < 4 || diffPropose.length > 6)
+            return message.channel.send({embed: {
+                color: 15700514,
+                description: "Mettez un titre et entre 2 et 4 proposition !",
+                footer: {
+                    icon_url: message.author.avatarURL,
+                    text: `Pour ${message.author.tag}`
+                }
+            }});
+
+        else if(diffPropose.length === 4)
+            return message.channel.send(`:loudspeaker: **${diffPropose[1]}**`, {embed: {
+                color: 130,
+                description: `\n:regional_indicator_a: **${diffPropose[2]}**\n\n:regional_indicator_b: **${diffPropose[3]}**`,
+                footer: {
+                    text: `À vous de choisir !`
+                }
+            }});
+        else if(diffPropose.length === 5)
+            return message.channel.send(`:loudspeaker: **${diffPropose[1]}**`, {embed: {
+                color: 130,
+                description: `\n:regional_indicator_a: **${diffPropose[2]}**\n\n:regional_indicator_b: **${diffPropose[3]}**\n\n:regional_indicator_c: **${diffPropose[4]}**`,
+                footer: {
+                    text: `À vous de choisir !`
+                }
+            }});
+
+        else if(diffPropose.length === 6)
+            return message.channel.send(`:loudspeaker: **${diffPropose[1]}**`, {embed: {
+                color: 130,
+                description: `\n:regional_indicator_a: **${diffPropose[2]}**\n\n:regional_indicator_b: **${diffPropose[3]}**\n\n:regional_indicator_c: **${diffPropose[4]}**\n\n:regional_indicator_d: **${diffPropose[5]}**`,
+                footer: {
+                    text: `À vous de choisir !`
+                }
+            }});
+    }
+
+
+
+
+
+
 bot.on('message', message => {
   
     if (message.content === '//join') {
