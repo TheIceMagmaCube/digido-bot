@@ -6,7 +6,7 @@ const token = process.env.token;
 //Message de jeu dans le status
 bot.on('ready', function () {
     console.log("Je suis prêt et opérationnel.")
-    bot.user.setActivity("venir en paix").catch(console.error)
+    bot.user.setActivity("soigner des gens").catch(console.error)
 
 })
 
