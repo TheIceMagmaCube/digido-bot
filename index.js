@@ -44,7 +44,7 @@ client.on("message", async message => {
 		if(!message.member.roles.some(r=>["Staff"].includes(r.name)) )
 			return message.reply({embed: {
 				color: 15700514,
-				description: "Désolé vous n'avez pas la permission pour utilisé cette commande !"
+				description: "Désolé !\nVous n'avez pas la permission pour utiliser cette commande !"
 			}});
 
 		const sayMessage = args.join(" ");
@@ -59,7 +59,7 @@ client.on("message", async message => {
 		if(!message.member.roles.some(r=>["Staff"].includes(r.name)) )
 			return message.reply({embed: {
 				color: 15700514,
-				description: "Désolé vous n'avez pas la permission pour utilisé cette commande !"
+				description: "Désolé !\nVous n'avez pas la permission pour utiliser cette commande !"
 			}});
 
 		let member = message.mentions.members.first() || message.guild.members.get(args[0]);
@@ -93,7 +93,7 @@ client.on("message", async message => {
 		if(!message.member.roles.some(r=>["Staff"].includes(r.name)) )
 			return message.reply({embed: {
 				color: 15700514,
-				description: "Désolé vous n'avez pas la permission pour utilisé cette commande !"
+				description: "Désolé !\nVous n'avez pas la permission pour utiliser cette commande !"
 			}});
     
 		let member = message.mentions.members.first();
@@ -126,7 +126,7 @@ client.on("message", async message => {
 		if(!message.member.roles.some(r=>["Staff"].includes(r.name)) )
 			return message.reply({embed: {
 				color: 15700514,
-				description: "Désolé vous n'avez pas la permission pour utilisé cette commande !"
+				description: "Désolé !\nVous n'avez pas la permission pour utiliser cette commande !"
 			}});
 
 		const deleteCount = parseInt(args[0], 10);
@@ -149,7 +149,7 @@ client.on("message", async message => {
 		if(!message.member.roles.some(r=>["Staff"].includes(r.name)) )
 		return message.reply({embed: {
 			color: 15700514,
-			description: "Désolé vous n'avez pas la permission pour utilisé cette commande !"
+			description: "Désolé !\nVous n'avez pas la permission pour utiliser cette commande !"
 		}});
 		let diffPropose = message.content.split("|");
 		if(diffPropose.length < 4 || diffPropose.length > 6)
@@ -194,7 +194,7 @@ client.on("message", async message => {
 		if(!message.member.roles.some(r=>["Staff"].includes(r.name)) )
 		return message.reply({embed: {
 			color: 15700514,
-			description: "Désolé vous n'avez pas la permission pour utilisé cette commande !"
+			description: "Désolé !\nVous n'avez pas la permission pour utiliser cette commande !"
 		}});
 
 		let mention = message.mentions.members.first();
