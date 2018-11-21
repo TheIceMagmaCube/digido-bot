@@ -165,29 +165,41 @@ client.on("message", async message => {
 		else if(diffPropose.length === 4)
 			return message.channel.send(`:loudspeaker: **${diffPropose[1]}**`, {embed: {
 				color: 130,
-				description: `\n:regional_indicator_a: **${diffPropose[2]}**\n\n:regional_indicator_b: **${diffPropose[3]}**`,
+				description: `\n:one: **${diffPropose[2]}**\n\n:two: **${diffPropose[3]}**`,
 				footer: {
 					text: `À vous de choisir !`
 				}
-			}});
+			}}).then(message => {
+				message.react("2⃣"),
+				message.react("1⃣")
+			});
 
 		else if(diffPropose.length === 5)
 			return message.channel.send(`:loudspeaker: **${diffPropose[1]}**`, {embed: {
 				color: 130,
-				description: `\n:regional_indicator_a: **${diffPropose[2]}**\n\n:regional_indicator_b: **${diffPropose[3]}**\n\n:regional_indicator_c: **${diffPropose[4]}**`,
+				description: `\n:one: **${diffPropose[2]}**\n\n:two: **${diffPropose[3]}**\n\n:three: **${diffPropose[4]}**`,
 				footer: {
 					text: `À vous de choisir !`
 				}
-			}});
+			}}).then(message => {
+				message.react("3⃣"),
+				message.react("2⃣"),
+				message.react("1⃣")
+			});
 
 		else if(diffPropose.length === 6)
 			return message.channel.send(`:loudspeaker: **${diffPropose[1]}**`, {embed: {
 				color: 130,
-				description: `\n:regional_indicator_a: **${diffPropose[2]}**\n\n:regional_indicator_b: **${diffPropose[3]}**\n\n:regional_indicator_c: **${diffPropose[4]}**\n\n:regional_indicator_d: **${diffPropose[5]}**`,
+				description: `\n:one: **${diffPropose[2]}**\n\n:two: **${diffPropose[3]}**\n\n:three: **${diffPropose[4]}**\n\n:four: **${diffPropose[5]}**`,
 				footer: {
 					text: `À vous de choisir !`
 				}
-			}});
+			}}).then(message => {
+				message.react("4⃣"),
+				message.react("3⃣"),
+				message.react("2⃣"),
+				message.react("1⃣")
+			});
 	}
 	
 	if(command === "mpto") {
