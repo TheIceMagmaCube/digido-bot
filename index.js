@@ -220,7 +220,7 @@ client.on("message", async message => {
 	}
 	
 	if(command === "play") {
-		let urlMusic = message.content(" ");
+		let urlMusic = message.content.split(" ");
 		
 		if(urlMusic.length === 2) {
 			if(message.member.voiceChannel) {
