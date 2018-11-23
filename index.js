@@ -28,7 +28,7 @@ client.on("message", async message => {
 	if(command === "help") {
 		message.channel.send({embed: {
 			color: 130,
-			description: `**Liste des commandes :**\n\n\`//help\`\n *Utilisation: //help*\n\n\`//ping\`\n *Utilisation: //ping*\n\n\`//say\`\n *Utilisation: //say La chose à faire dire au bot !*\n\n\`//poll\`\n *Utilisation : //poll |Titre du sondage|Proposition 1|Proposition 2|Proposition 3|Proposition 4*\n\n\`//kick\`\n *Utilisation: //kick @lenomdumembre#0000 La raison du kick !*\n\n\`//ban\`\n *Utilisation: //ban @lenomdumembre#0000 La raison du ban !*\n\n\`//nuke\`\n *Utilisation: //nuke Un_nombre_entre_2_et_100*\n\n\`//mpto\`\n *Utilisation: //mpto | @lenomdumembre#0000 Le MP à envoyer*\n\n\`//play\`\n *Utilisation: //play URL_de_la_musique*\n\n\`//pause\`\n *Utilisation: //pause*\n\n\`//resume\`\n *Utilisation: //resume*\n\n\`//connect\`\n *Utilisation: //connect*\n\n\`//disconnect\`\n *Utilisation: //disconnect*\n\n\`//report\`\n *Utilisation: //report @lenomdumembre#0000 La raison du report*`
+			description: `**Liste des commandes :**\n\n\`//help\`\n *Utilisation: //help*\n\n\`//ping\`\n *Utilisation: //ping*\n\n\`//say\`\n *Utilisation: //say La chose à faire dire au bot !*\n\n\`//poll\`\n *Utilisation : //poll |Titre du sondage|Proposition 1|Proposition 2|Proposition 3|Proposition 4*\n\n\`//kick\`\n *Utilisation: //kick @lenomdumembre#0000 La raison du kick !*\n\n\`//ban\`\n *Utilisation: //ban @lenomdumembre#0000 La raison du ban !*\n\n\`//nuke\`\n *Utilisation: //nuke Un_nombre_entre_2_et_100*\n\n\`//mpto\`\n *Utilisation: //mpto | @lenomdumembre#0000 Le MP à envoyer*\n\n\`//play\`\n *Utilisation: //play URL_de_la_musique*\n\n\`//pause\`\n *Utilisation: //pause*\n\n\`//resume\`\n *Utilisation: //resume*\n\n\`//connect\`\n *Utilisation: //connect*\n\n\`//disconnect\`\n *Utilisation: //disconnect*\n\n\`//report\`\n *Utilisation: //report @lenomdumembre#0000 La raison du report*\n\n\`//reportbug\`\n *Utilisation: //reportbug L'explication du bug report*`
 		}});
 	}
  
@@ -295,6 +295,20 @@ client.on("message", async message => {
 		client.channels.get("515641149122281514").send({embed: {
 			color: 13107200,
 			description: `${member.user.tag} à été report par ${message.author.tag} car: ${reason}`
+		}});
+	}
+	
+	if(command === "reportbug") {
+		let reason = args.slice(1).join(' ');
+		if(!reason)
+			return message.reply({embed: {
+				color: 15700514,
+				description: "Veillez donné une explication du bug !"
+			}});
+    
+		client.channels.get("515641149122281514").send({embed: {
+			color: 15700514,
+			description: `Un bug à été report par ${message.author.tag} et le bug est: ${reason}`
 		}});
 	}
 });
