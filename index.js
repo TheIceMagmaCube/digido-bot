@@ -292,10 +292,6 @@ client.on("message", async message => {
 		let reason = args.slice(1).join(' ');
 		if(!reason) reason = "Aucune raison fournie !";
     
-		client.channels("515641149122281514").send({embed: {
-			color: 13107200,
-			description: `${member.user.tag} à été report par ${message.author.tag} car: ${reason}`
-		}});
-
+		client.channels("515641149122281514").send(`${member.user.tag} à été report par ${message.author.tag} car: ${reason}`);
 	}
 });
