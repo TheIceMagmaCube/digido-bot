@@ -274,4 +274,28 @@ client.on("message", async message => {
 	if(command === "disconnect") {
 		message.member.voiceChannel.leave();
 	}
+	
+	if(command === "report") {
+		if(!message.member.roles.some(r=>["Staff"].includes(r.name)) )
+			return message.reply({embed: {
+				color: 15700514,
+				description: "Désolé !\nVous n'avez pas la permission pour utiliser cette commande !"
+			}});
+
+		let member = message.mentions.members.first() || message.guild.members.get(args[0]);
+		if(!member)
+			return message.reply({embed: {
+				color: 15700514,
+				description: "Mentionnée un membre valide du serveur !"
+			}});
+
+		let reason = args.slice(1).join(' ');
+		if(!reason) reason = "Aucune raison fournie !";
+    
+		message.channels.get(`515641149122281514`).send({embed: {
+			color: 13107200,
+			description: `${member.user.tag} à été report par ${message.author.tag} car: ${reason}`
+		}});
+
+	}
 });
