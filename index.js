@@ -216,7 +216,7 @@ client.on("message", async message => {
 		mention.send(mentionMessage);
 		message.channel.send({embed: {
 			color: 33280,
-			description: `L'envoi à bien été effectué.`
+			description: `L'envoi a bien été effectué.`
 		}});
 	}
 	
