@@ -172,6 +172,7 @@ client.on("message", async message => {
 				}
 			}}).then(message => {
 				message.react("1⃣"),
+				setTimeOut(fonctionAExecuter, 500),
 				message.react("2⃣")
 			});
 
@@ -184,7 +185,9 @@ client.on("message", async message => {
 				}
 			}}).then(message => {
 				message.react("1⃣"),
+				setTimeOut(fonctionAExecuter, 500),
 				message.react("2⃣"),
+				setTimeOut(fonctionAExecuter, 500),
 				message.react("3⃣")
 			});
 
@@ -197,8 +200,11 @@ client.on("message", async message => {
 				}
 			}}).then(message => {
 				message.react("1⃣"),
+				setTimeOut(fonctionAExecuter, 500),
 				message.react("2⃣"),
+				setTimeOut(fonctionAExecuter, 500),
 				message.react("3⃣"),
+				setTimeOut(fonctionAExecuter, 500),
 				message.react("4⃣")
 			});
 	}
