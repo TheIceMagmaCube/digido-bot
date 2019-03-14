@@ -7,7 +7,7 @@ client.login(process.env.token);
 
 client.on("ready", () => {
 	console.log(`Le bot est connecté, avec ${client.users.size} utilisateurs, dans ${client.channels.size} channels de ${client.guilds.size} serveurs.`); 
-	client.user.setActivity("soigner des gens.");
+	client.user.setActivity("apprendre de ses erreurs.");
 });
 
 client.on("guildMemberAdd", member => {
