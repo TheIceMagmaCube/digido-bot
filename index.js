@@ -292,7 +292,7 @@ client.on("message", async message => {
 		let reason = args.slice(1).join(' ');
 		if(!reason) reason = "Aucune raison fournie !";
     
-		client.channels.get("515641149122281514").send({embed: {
+		client.channels.get("553680565010694148").send({embed: {
 			color: 13107200,
 			description: `${member.user.tag} à été report par ${message.author.tag} car: ${reason}`
 		}});
@@ -306,7 +306,7 @@ client.on("message", async message => {
 				description: "Veillez donné une explication du bug !"
 			}});
     
-		client.channels.get("515641149122281514").send({embed: {
+		client.channels.get("553680565010694148").send({embed: {
 			color: 15700514,
 			description: `Un bug à été report par ${message.author.tag} et le bug est: ${reason}`
 		}});
