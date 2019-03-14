@@ -171,8 +171,8 @@ client.on("message", async message => {
 					text: `À vous de choisir !`
 				}
 			}}).then(message => {
-				message.react("2⃣"),
-				message.react("1⃣")
+				message.react("1⃣"),
+				message.react("2⃣")
 			});
 
 		else if(diffPropose.length === 5)
@@ -183,9 +183,9 @@ client.on("message", async message => {
 					text: `À vous de choisir !`
 				}
 			}}).then(message => {
-				message.react("3⃣"),
+				message.react("1⃣"),
 				message.react("2⃣"),
-				message.react("1⃣")
+				message.react("3⃣")
 			});
 
 		else if(diffPropose.length === 6)
@@ -196,10 +196,10 @@ client.on("message", async message => {
 					text: `À vous de choisir !`
 				}
 			}}).then(message => {
-				message.react("4⃣"),
-				message.react("3⃣"),
+				message.react("1⃣"),
 				message.react("2⃣"),
-				message.react("1⃣")
+				message.react("3⃣"),
+				message.react("4⃣")
 			});
 	}
 	
