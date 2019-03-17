@@ -237,7 +237,7 @@ client.on("message", async message => {
 		let member = message.mentions.members.first() || message.guild.members.get(args[0]);
 		let reason = args.slice(1).join(' ');
 		if(!reason) reason = "Aucune raison fournie !";
-		client.channels.get("553680565010694148").send({embed: {
+		client.channels.get("556964601821134868").send({embed: {
 			color: 13107200,
 			description: `${member.user.tag} à été report par ${message.author.tag} car: ${reason}`
 		}});
