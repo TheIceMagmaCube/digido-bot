@@ -28,7 +28,7 @@ client.on("message", async message => {
 	if(command === "help") {
 		message.channel.send({embed: {
 			color: 130,
-			description: `**Liste des commandes :**\n\n\`//help\`\n *Utilisation: //help*\n\n\`//ping\`\n *Utilisation: //ping*\n\n\`//say\`\n *Utilisation: //say La chose à faire dire au bot !*\n\n\`//poll\`\n *Utilisation : //poll |Titre du sondage|Proposition 1|Proposition 2|Proposition 3|Proposition 4*\n\n\`//kick\`\n *Utilisation: //kick @lenomdumembre#0000 La raison du kick !*\n\n\`//ban\`\n *Utilisation: //ban @lenomdumembre#0000 La raison du ban !*\n\n\`//nuke\`\n *Utilisation: //nuke Un_nombre_entre_2_et_100*\n\n\`//mpto\`\n *Utilisation: //mpto | @lenomdumembre#0000 Le MP à envoyer*\n\n\`//play\`\n *Utilisation: //play URL_de_la_musique*\n\n\`//pause\`\n *Utilisation: //pause*\n\n\`//resume\`\n *Utilisation: //resume*\n\n\`//connect\`\n *Utilisation: //connect*\n\n\`//disconnect\`\n *Utilisation: //disconnect*\n\n\`//report\`\n *Utilisation: //report @lenomdumembre#0000 La raison du report*\n\n\`//reportbug\`\n *Utilisation: //reportbug L'explication du bug report*`
+			description: `**Liste des commandes :**\n\n\`//help\`\n *Utilisation: //help*\n\n\`//ping\`\n *Utilisation: //ping*\n\n\`//say\`\n *Utilisation: //say La chose à faire dire au bot !*\n\n\`//poll\`\n *Utilisation : //poll |Titre du sondage|Proposition 1|Proposition 2|Proposition 3|Proposition 4*\n\n\`//kick\`\n *Utilisation: //kick @lenomdumembre#0000 La raison du kick !*\n\n\`//ban\`\n *Utilisation: //ban @lenomdumembre#0000 La raison du ban !*\n\n\`//nuke\`\n *Utilisation: //nuke Un_nombre_entre_2_et_100*\n\n\`//warn\`\n *Utilisation: //warn | @lenomdumembre#0000 La raison du warn !*\n\n\`//mpto\`\n *Utilisation: //mpto | @lenomdumembre#0000 Le MP à envoyer*\n\n\`//play\`\n *Utilisation: //play URL_de_la_musique*\n\n\`//pause\`\n *Utilisation: //pause*\n\n\`//resume\`\n *Utilisation: //resume*\n\n\`//connect\`\n *Utilisation: //connect*\n\n\`//disconnect\`\n *Utilisation: //disconnect*\n\n\`//report\`\n *Utilisation: //report @lenomdumembre#0000 La raison du report*\n\n\`//reportbug\`\n *Utilisation: //reportbug L'explication du bug report*`
 		}});
 	}
  
@@ -220,6 +220,29 @@ client.on("message", async message => {
 		}});
 	}
 	
+	if(command === "warn") {
+		if(!message.member.roles.some(r=>["Staff"].includes(r.name)) )
+		return message.reply({embed: {
+			color: 15700514,
+			description: "Désolé !\nVous n'avez pas la permission pour utiliser cette commande !"
+		}});
+
+		let mention = message.mentions.members.first();
+		let mentionMessage = message.content.slice(8);
+		mention.send(`📢 WARN 📢 \n` + mentionMessage);
+		message.channel.send({embed: {
+			color: 33280,
+			description: `Le warn a bien été effectué.`
+		}});
+		let member = message.mentions.members.first() || message.guild.members.get(args[0]);
+		let reason = args.slice(1).join(' ');
+		if(!reason) reason = "Aucune raison fournie !";
+		client.channels.get("553680565010694148").send({embed: {
+			color: 13107200,
+			description: `${member.user.tag} à été report par ${message.author.tag} car: ${reason}`
+		}});
+	}
+	
 	if(command === "play") {
 		let urlMusic = message.content.split(" ");
 		
@@ -276,12 +299,6 @@ client.on("message", async message => {
 	}
 	
 	if(command === "report") {
-		if(!message.member.roles.some(r=>["Staff"].includes(r.name)) )
-			return message.reply({embed: {
-				color: 15700514,
-				description: "Désolé !\nVous n'avez pas la permission pour utiliser cette commande !"
-			}});
-
 		let member = message.mentions.members.first() || message.guild.members.get(args[0]);
 		if(!member)
 			return message.reply({embed: {
