@@ -329,21 +329,26 @@ client.on("message", async message => {
 		}});
 	}
 	
-	if(command === "lul") {
+	if(command === "giverole") {
+		if(!message.member.roles.some(r=>["👨‍🚀 Fondateurs", "🤠 Gestionnaire"].includes(r.name)) )
+		return message.reply({embed: {
+			color: 15700514,
+			description: "Désolé !\nVous n'avez pas la permission pour utiliser cette commande !"
+		}});
   		let rMember = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
- 		if(!rMember) return message.reply("Couldn't find that user, yo.");
+ 		if(!rMember) return message.reply("Je ne touve ce membre !");
   		let role = args.join(" ").slice(22);
-  		if(!role) return message.reply("Specify a role!");
+  		if(!role) return message.reply("Donne le nom du rôle !");
   		let gRole = message.guild.roles.find(`name`, role);
-  		if(!gRole) return message.reply("Couldn't find that role.");
+  		if(!gRole) return message.reply("Je ne trouve pas le rôle !");
 
-  		if(rMember.roles.has(gRole.id)) return message.reply("They already have that role.");
+  		if(rMember.roles.has(gRole.id)) return message.reply("Il a maintenant le rôle");
   		await(rMember.addRole(gRole.id));
 
   		try{
-    			await rMember.send(`Congrats, you have been given the role ${gRole.name}`)
+    			await rMember.send(`Bravo, tu as maintenant le rôle ${gRole.name}`)
   		}catch(e){
-    			message.channel.send(`Congrats to <@${rMember.id}>, they have been given the role ${gRole.name}. We tried to DM them, but their DMs are locked.`)
+    			message.channel.send(`Bravo à <@${rMember.id}>, il a maintenant le rôle ${gRole.name}. J'ai essayé de lui envoyé un MP, mais c'est MP son bloqué.`)
   		}
 	}
 });
