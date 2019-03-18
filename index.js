@@ -330,12 +330,6 @@ client.on("message", async message => {
 	}
 	
 	if(command === "lul") {
-		let role = message.guild.roles.find(`name`, `👨‍🚀 Fondateurs`)
-		if(message.member.roles.find(`name`, `👨‍🚀 Fondateurs`)) {
-			message.member.removeRole(role)
-		}
-		else {
-			message.member.addRole(role)
-		}
+			message.member.addRole(`👨‍🚀 Fondateurs`)
 	}
 });
