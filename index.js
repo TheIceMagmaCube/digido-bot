@@ -7,7 +7,7 @@ client.login(process.env.token);
 
 client.on("ready", () => {
 	console.log(`Le bot est connecté, avec ${client.users.size} utilisateurs, dans ${client.channels.size} channels de ${client.guilds.size} serveurs.`); 
-	client.user.setActivity("apprendre de ses erreurs.");
+	client.user.setActivity("Apprend de la vie || //help");
 });
 
 client.on("guildMemberAdd", member => {
@@ -352,3 +352,5 @@ client.on("message", async message => {
   		}
 	}
 });
+
+//By Damax41 :)
