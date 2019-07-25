@@ -197,9 +197,13 @@ client.on("message", async message => {
 				}
 			}}).then(message => {
 				message.react("1⃣"),
+				setTimeout 1
 				message.react("2⃣"),
+				setTimeout 1
 				message.react("3⃣"),
+				setTimeout 1
 				message.react("4⃣")
+				setTimeout 1
 			});
 	}
 	
