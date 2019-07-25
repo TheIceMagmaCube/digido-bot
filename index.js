@@ -197,13 +197,9 @@ client.on("message", async message => {
 				}
 			}}).then(message => {
 				message.react("1⃣"),
-				setTimeout 1
 				message.react("2⃣"),
-				setTimeout 1
 				message.react("3⃣"),
-				setTimeout 1
 				message.react("4⃣")
-				setTimeout 1
 			});
 	}
 	
@@ -307,7 +303,7 @@ client.on("message", async message => {
 		if(!member)
 			return message.reply({embed: {
 				color: 15700514,
-				description: "Mentionnée un membre valide du serveur !"
+				description: "Mentionnez un membre valide du serveur !"
 			}});
 
 		let reason = args.slice(1).join(' ');
@@ -315,7 +311,7 @@ client.on("message", async message => {
     
 		client.channels.get("553680565010694148").send({embed: {
 			color: 13107200,
-			description: `${member.user.tag} à été report par ${message.author.tag} car: ${reason}`
+			description: `${member.user.tag} à été reporté par ${message.author.tag} car: ${reason}`
 		}});
 	}
 	
@@ -324,12 +320,12 @@ client.on("message", async message => {
 		if(!reason)
 			return message.reply({embed: {
 				color: 15700514,
-				description: "Veillez donné une explication du bug !"
+				description: "Veuillez donner une explication de l'erreur !"
 			}});
     
 		client.channels.get("553680565010694148").send({embed: {
 			color: 15700514,
-			description: `Un bug à été report par ${message.author.tag} et le bug est: ${reason}`
+			description: `Un bug à été report par ${message.author.tag} et le bug est : ${reason}`
 		}});
 	}
 	
