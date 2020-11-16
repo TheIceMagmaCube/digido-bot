@@ -7,7 +7,7 @@ client.login(process.env.token);
 
 client.on("ready", () => {
 	console.log(`Le bot est connecté, avec ${client.users.size} utilisateurs, dans ${client.channels.size} channels de ${client.guilds.size} serveurs.`); 
-	client.user.setActivity("Apprend de la vie || //help");
+	client.user.setActivity("Digido STUDIO se réinvente");
 });
 
 client.on("guildMemberAdd", member => {
